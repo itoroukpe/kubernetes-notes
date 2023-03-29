@@ -1,4 +1,4 @@
-# Landmark Technologies == Kubernetes - Deployment
+# Rondus Technologies == Kubernetes - Deployment
 
 ## Step-01: Introduction to Deployments
 - What is a Deployment?
