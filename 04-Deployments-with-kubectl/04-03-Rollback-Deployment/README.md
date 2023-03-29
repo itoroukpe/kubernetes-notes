@@ -1,4 +1,4 @@
-# Landmark Technologies == Rollback Deployment
+# Rondus Technologies == Rollback Deployment
 
 ## Step-00: Introduction
 - We can rollback a deployment in two ways.
