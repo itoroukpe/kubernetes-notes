@@ -1,5 +1,5 @@
 
-# Landmark Technologies == Kubernetes Dasboard (UI)
+# Rondus Technologies == Kubernetes Dasboard (UI)
 # Managing Kubernetes resources from the UI
 - 
 
