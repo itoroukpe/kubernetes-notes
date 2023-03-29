@@ -1,4 +1,4 @@
-# Landmark Technologies  == Kubernetes  - PODs
+# Rondus Technologies  == Kubernetes  - PODs
 
 ## Step-01: PODs Introduction
 - What is a POD ?
