@@ -1,4 +1,4 @@
-# Landmark Technologies == Pause & Resume Deployments
+# Rondus Technologies == Pause & Resume Deployments
 
 ## Step-00: Introduction
 - Why do we need Pausing & Resuming Deployments?
