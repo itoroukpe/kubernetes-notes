@@ -1,4 +1,4 @@
-# Landmark Technologies == Kubernetes Update Deployments
+# Rondus Technologies == Kubernetes Update Deployments
 
 ## Step-00: Introduction
 - We can update deployments using two options
