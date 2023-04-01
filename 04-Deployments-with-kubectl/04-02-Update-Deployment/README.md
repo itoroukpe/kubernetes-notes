@@ -129,3 +129,20 @@ Observation: Make a note of "EXTERNAL-IP" if your Kubernetes cluster is setup on
 # Application URL
 http://<worker-node-public-ip>:<Node-Port>
 ```
+The following error indicates a possible certificate mismatch.
+# kubectl get pods
+Unable to connect to the server: x509: certificate signed by unknown authority (possibly because of "crypto/rsa: verification error" while trying to verify candidate authority certificate "kubernetes")
+
+Run this script
+set it to the default KUBECONFIG location:
+
+export KUBECONFIG=/etc/kubernetes/admin.conf
+
+OR
+
+Overwrite the existing kubeconfig for the "admin" user:
+
+mv  $HOME/.kube $HOME/.kube.bak
+mkdir $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
