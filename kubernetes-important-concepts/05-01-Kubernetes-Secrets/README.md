@@ -36,6 +36,37 @@ data:
   # Output of "echo -n 'devdb@123' | base64"
   db-password: ZGV2ZGJAMTIz
 ```
+### Example
+---
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: mongo-configmap 
+data:
+  db-username: devdb
+---
+          env:
+            - name: MONGO_DB_USERNAME
+              valueFrom: 
+                configMapKeyRef: 
+                  name: mongo-configmap 
+                  key: db-username
+--
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mongo-password
+type: Opaque
+stringData:
+  db-password: ZGV2ZGJAMTIz 
+---
+            env:
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-password
+                  key: db-password
+```
 ## create secret to access a docker-hub private  registry
 # 
 kubectl create secret docker-registry regcred \
