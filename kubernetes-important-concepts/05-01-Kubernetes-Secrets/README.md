@@ -68,6 +68,46 @@ stringData:
                   name: mongo-password
                   key: db-password
 ```
+Springboot App
+```
+app.yml
+===
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springapp
+spec:
+  selector:
+    matchLabels:
+      app: springapp
+  replicas: 3
+  template:
+    metadata:
+      name: springapp
+      labels:
+        app: springapp
+    spec:
+      containers:
+        - name: springapp
+          image: mylandmarktech/spring-boot-mongo
+          ports:
+          - containerPort: 8080
+          env:
+          - name: MONGO_DB_USERNAME
+            valueFrom:
+                configMapKeyRef:
+                  name: mongo-configmap
+                  key: db-username
+          - name: MONGO_DB_PASSWORD
+            valueFrom:
+                secretKeyRef:
+                  name: mongo-password
+                  key: db-password
+          - name: MONGO_DB_HOSTNAME
+            value: mongo
+
+```
+
 ## create secret to access a docker-hub private  registry
 # 
 kubectl create secret docker-registry regcred \
