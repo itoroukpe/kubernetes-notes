@@ -37,21 +37,22 @@ data:
   db-password: ZGV2ZGJAMTIz
 ```
 ### Example
----
+```
 kind: ConfigMap 
 apiVersion: v1 
 metadata:
   name: mongo-configmap 
 data:
   db-username: devdb
----
+
           env:
             - name: MONGO_DB_USERNAME
               valueFrom: 
                 configMapKeyRef: 
                   name: mongo-configmap 
                   key: db-username
---
+```
+```
 apiVersion: v1
 kind: Secret
 metadata:
@@ -59,7 +60,7 @@ metadata:
 type: Opaque
 stringData:
   db-password: ZGV2ZGJAMTIz 
----
+
             env:
             - name: MONGO_INITDB_ROOT_PASSWORD
               valueFrom:
