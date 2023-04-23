@@ -29,16 +29,37 @@ In the case of NGINX, the Ingress controller is deployed in a pod along with the
 
 ## 1. Add helm charts for Nginx Ingress into a server where you have kubectl and helm
 
+Getting the Chart Sources
+This step is required if you’re installing the chart using its sources. Additionally, the step is also required for managing the custom resource definitions (CRDs), which the Ingress Controller requires by default, or for upgrading/deleting the CRDs.
+
+Clone the Ingress Controller repo:
 ```
-helm repo add nginx https://helm.nginx.com/stable
-helm repo update
+$ git clone https://github.com/nginxinc/kubernetes-ingress.git --branch v3.1.0
 ```
-## 2. Deploy nginx-ingress using helm chart
- # NB. This will create nginx-ingress namespace, clusterRole, ClusterRoleBinding and more
+## 2. Change your working directory to /deployments/helm-chart:
 ```
-  helm install nginx nginx/nginx-ingress
+$ cd kubernetes-ingress/deployments/helm-chart
 ```
-## 2b. UnDeploy nginx-ingress using helm
+## Adding the Helm Repository
+This step is required if you’re installing the chart via the helm repository.
+```
+$ helm repo add nginx-stable https://helm.nginx.com/stable
+$ helm repo update
+```
+## Installing the Chart
+Installing the CRDs
+By default, the Ingress Controller requires a number of custom resource definitions (CRDs) installed in the cluster. The Helm client will install those CRDs. If the CRDs are not installed, the Ingress Controller pods will not become Ready.
+
+If you do not use the custom resources that require those CRDs (which corresponds to controller.enableCustomResources set to false and controller.appprotect.enable set to false), the installation of the CRDs can be skipped by specifying --skip-crds for the helm install command.
+
+Installing via Helm Repository
+To install the chart with the release name my-release (my-release is the name that you choose):
+
+For NGINX:
+```
+$ helm install my-release nginx-stable/nginx-ingress
+```
+##  UnDeploy nginx-ingress using helm
  # NB. This will delete nginx-ingress and all associated resources and services
 ```
   helm uninstall nginx
@@ -51,25 +72,25 @@ helm repo update
  kubectl get svc
 ```
 
-## 4.  How Ingress Controller can be deployed
+##  How Ingress Controller can be deployed
 
 We include two options for deploying the Ingress controller:
  * *Deployment*. Use a Deployment if you plan to dynamically change the number of Ingress controller replicas.
  * *DaemonSet*. Use a DaemonSet for deploying the Ingress controller on every node or a subset of nodes.
 
 
-## 5. Check that the Ingress Controller is Running
+##  Check that the Ingress Controller is Running
 
 Check that the Ingress Controller is Running
 Run the following command to make sure that the Ingress controller pods are running:
 ```
  kubectl get pods --namespace=ingress-nginx
 ```
-## 6. Get Access to the Ingress Controller
+##  Get Access to the Ingress Controller
 
  **If you created a daemonset**, ports 80 and 443 of the Ingress controller container are mapped to the same ports of the node where the container is running. To access the Ingress controller, use those ports and an IP address of any node of the cluster where the Ingress controller is running.
 
-### 6.1 Service with the Type LoadBalancer
+### Service with the Type LoadBalancer
 
 A service with the type **LoadBalancer** will be created as well. Kubernetes will allocate and configure a cloud load balancer for load balancing the Ingress controller pods.
 
@@ -94,9 +115,9 @@ You can resolve the DNS name into an IP address using `nslookup`:
 nslookup <dns-name>
 ```
 
-# 7. Ingress Resource:
+# Ingress Resource:
 
-### 5.1 Define path based or host based routing rules for your services.
+### Define path based or host based routing rules for your services.
 
 ### Single DNS Sample with host and servcie place holders
 ``` yaml
@@ -231,6 +252,5 @@ spec:
           servicePort: 80
 ```
 
-### Alternatively Deploy Ingress in kubernetes using Manifest Files
-https://github.com/LandmakTechnology/kubernestes-ingress
-```
+
+
