@@ -118,6 +118,21 @@ nslookup <dns-name>
 # Ingress Resource:
 
 ### Define path based or host based routing rules for your services.
+#### Path based routing
+Path-based routing is a technique used in computer networks and web applications to direct incoming requests to the appropriate destination based on the path specified in the request URL. In path-based routing, the path component of the URL is used to determine which endpoint or resource should handle the request.
+
+For example, in a web application with path-based routing, requests to the URL "example.com/blog" might be routed to a blogging application, while requests to "example.com/api" might be routed to a separate API application.
+
+Path-based routing is often used in combination with load balancing and traffic management techniques to distribute requests across multiple servers or instances. This allows for greater scalability and redundancy in complex systems with many endpoints and resources.
+
+#### Host based routing
+Host-based routing is a technique used in computer networks and web applications to direct incoming requests to the appropriate destination based on the hostname specified in the request URL. In host-based routing, the hostname component of the URL is used to determine which endpoint or resource should handle the request.
+
+For example, in a web application with host-based routing, requests to the URL "example.com" might be routed to one set of servers or resources, while requests to "api.example.com" might be routed to a separate set of servers or resources that handle API requests.
+
+Host-based routing can be used to direct traffic to different servers or resources based on factors such as geographic location, network topology, or application type. This allows for more granular control over how requests are handled and can improve performance, security, and scalability in complex systems.
+
+
 
 ### Single DNS Sample with host and servcie place holders
 ``` yaml
